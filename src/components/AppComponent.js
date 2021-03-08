@@ -6,7 +6,7 @@ import { auth, analytics } from "../firebase"
 
 import CanvasJSReact from '../assets/canvasjs.react';
 
-const base_url = 'http://localhost:5000/'
+const base_url = 'https://bio-api.herokuapp.com/'
 
 function AppComponent() {
 
