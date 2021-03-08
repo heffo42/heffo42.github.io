@@ -13,6 +13,8 @@ import UpdateProfile from "./UpdateProfile"
 import CanvasJSReact from '../assets/canvasjs.react';
 import Search from './Search'
 import NavBar from "./Navbar/Navbar"
+import TimelineCreator from "./TimelineCreator"
+import AppComponent from "./AppComponent"
 
 //var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -30,10 +32,11 @@ function App() {
             <Container
               className="d-flex align-items-center justify-content-center"
               style={{ minHeight: "100vh" }}>
-                <div className="w-100" style={{ maxWidth: "400px" }}>
+                <div className="w-100" style={{ maxWidth: "1000px" }}>
                   <Switch>
                     <PrivateRoute exact path="/" component={Search} />
                     <PrivateRoute path="/update-profile" component={UpdateProfile} />
+                    <PrivateRoute path ="/timeline" component = {AppComponent} />
                     <Route path="/signup" component={Signup} />
                     <Route path="/login" component={Login} />
                     <Route path="/logout" component={Logout} />
