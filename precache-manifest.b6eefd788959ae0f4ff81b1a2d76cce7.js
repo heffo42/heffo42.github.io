@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "09099b881ffdf25b18bf7db8b274e5d5",
+    "revision": "5ad880a94e5fd0ad4b4b10dbd35cd7e6",
     "url": "/heffo42.github.io/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/heffo42.github.io/static/css/2.ff645aaf.chunk.css"
   },
   {
-    "revision": "e90e4ec2f8c54ab4f206",
+    "revision": "779ec85ad1da80d9d47f",
     "url": "/heffo42.github.io/static/css/main.bb0c0b1c.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/heffo42.github.io/static/js/2.80d77e04.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e90e4ec2f8c54ab4f206",
-    "url": "/heffo42.github.io/static/js/main.3f4a98f0.chunk.js"
+    "revision": "779ec85ad1da80d9d47f",
+    "url": "/heffo42.github.io/static/js/main.7b61c814.chunk.js"
   },
   {
     "revision": "60fdc0f659ff4c952852",
