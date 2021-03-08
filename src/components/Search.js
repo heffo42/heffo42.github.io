@@ -19,9 +19,11 @@ import CanvasJSReact from '../assets/canvasjs.react';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+
 //const base_url = 'http://157.230.216.187:5000/'
 // const base_url = 'http://localhost:5000/'
 const base_url = 'https://bio-api.herokuapp.com/'
+
 
 function Search() {
     
@@ -157,10 +159,14 @@ function Search() {
           <thead>
             <tr>
               <th>NCT ID</th>
+              <th>Company</th>
               <th>Title</th>
               <th>Interventions</th>
               <th>Current Phase</th>
               <th>Last Update</th>
+              <th>Start Date</th>
+              <th>Completion Date</th>
+              <th>Recruitment Status</th>
             </tr>
           </thead>
           {selected_data != null &&
@@ -168,10 +174,14 @@ function Search() {
             {
               selected_data.map(item => (<tr>
                 <td>{item[0]}</td>
+                <td>{item[1]}</td>
                 <td>{item[2]}</td>
                 <td>{item[4]}</td>
                 <td>{item[3]}</td>
                 <td>{item[5]}</td>
+                <td>{item[7]}</td>
+                <td>{item[6]}</td>
+                <td>{item[8]}</td>
               </tr>))
             }
           </tbody>}

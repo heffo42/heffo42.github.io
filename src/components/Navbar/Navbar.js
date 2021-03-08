@@ -20,16 +20,16 @@ const NavBar = () => {
   <ReactBootStrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
     <ReactBootStrap.Nav className="mr-auto"> 
-    <Link to="/">
-    <ReactBootStrap.Nav.Link href="#features">Search</ReactBootStrap.Nav.Link>
-    </Link>
     <Link to="/pricing">
     <ReactBootStrap.Nav.Link href="#pricing">Pricing</ReactBootStrap.Nav.Link>
     </Link>
       <ReactBootStrap.NavDropdown title="Features" id="collasible-nav-dropdown">
-        <ReactBootStrap.NavDropdown.Item href="#action/3.1">Drug Search</ReactBootStrap.NavDropdown.Item>
-        <ReactBootStrap.NavDropdown.Item href="#action/3.2">Company Search</ReactBootStrap.NavDropdown.Item>
-        <ReactBootStrap.NavDropdown.Item href="#action/3.3">Timeline Comparison</ReactBootStrap.NavDropdown.Item>
+      <Link to="/">
+    <ReactBootStrap.Nav.Link href="#features">Search</ReactBootStrap.Nav.Link>
+    </Link>
+        <Link to="/timeline">
+    <ReactBootStrap.Nav.Link href="#features">Timeline Comparison</ReactBootStrap.Nav.Link>
+    </Link>
         <ReactBootStrap.NavDropdown.Divider />
         <ReactBootStrap.NavDropdown.Item href="#action/3.4">Transcript Analysis</ReactBootStrap.NavDropdown.Item>
       </ReactBootStrap.NavDropdown>
