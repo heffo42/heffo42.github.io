@@ -20,8 +20,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 //const base_url = 'http://157.230.216.187:5000/'
-const base_url = 'http://localhost:5000/'
-
+// const base_url = 'http://localhost:5000/'
+const base_url = 'https://bio-api.herokuapp.com/'
 
 function Search() {
     
