@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/heffo42.github.io/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/heffo42.github.io/static/js/main.642743d4.chunk.js",
+    "main.js.map": "/heffo42.github.io/static/js/main.642743d4.chunk.js.map",
+    "runtime-main.js": "/heffo42.github.io/static/js/runtime-main.0074c2a4.js",
+    "runtime-main.js.map": "/heffo42.github.io/static/js/runtime-main.0074c2a4.js.map",
+    "static/css/2.ff645aaf.chunk.css": "/heffo42.github.io/static/css/2.ff645aaf.chunk.css",
+    "static/js/2.a904f4e1.chunk.js": "/heffo42.github.io/static/js/2.a904f4e1.chunk.js",
+    "static/js/2.a904f4e1.chunk.js.map": "/heffo42.github.io/static/js/2.a904f4e1.chunk.js.map",
+    "index.html": "/heffo42.github.io/index.html",
+    "precache-manifest.47bd71413eb5db340ba4fc1e329b841a.js": "/heffo42.github.io/precache-manifest.47bd71413eb5db340ba4fc1e329b841a.js",
+    "service-worker.js": "/heffo42.github.io/service-worker.js",
+    "static/css/2.ff645aaf.chunk.css.map": "/heffo42.github.io/static/css/2.ff645aaf.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "/heffo42.github.io/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.a904f4e1.chunk.js.LICENSE.txt": "/heffo42.github.io/static/js/2.a904f4e1.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0074c2a4.js",
+    "static/css/2.ff645aaf.chunk.css",
+    "static/js/2.a904f4e1.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.642743d4.chunk.js"
+  ]
+}
