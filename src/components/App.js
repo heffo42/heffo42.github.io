@@ -29,10 +29,7 @@ function App() {
       <Router>
         <AuthProvider>
           <NavBar />
-            <Container
-              className="d-flex align-items-center justify-content-center"
-              style={{ minHeight: "100vh" }}>
-                <div className="w-100" style={{ maxWidth: "1000px" }}>
+            <Container fluid>
                   <Switch>
                     <PrivateRoute exact path="/" component={Search} />
                     <PrivateRoute path="/update-profile" component={UpdateProfile} />
@@ -42,7 +39,6 @@ function App() {
                     <Route path="/logout" component={Logout} />
                     <Route path="/forgot-password" component={ForgotPassword} />
                   </Switch>
-                </div>
               </Container>
             </AuthProvider>
         </Router>
