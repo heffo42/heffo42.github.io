@@ -98,13 +98,13 @@ function Search() {
           var formatted_rows = []
           for (var row of result) {
             console.log(row)
-            formatted_rows.push({company : row[0], title : row[1], title : row[2], interventions : row[4], phase : row[3], update : row[5], start : row[7], completion : row[6], recruitment : row[8]})
+            formatted_rows.push({id : row[0], company : row[1], title : row[2], interventions : row[4], phase : row[3], update : row[5], start : row[7], completion : row[6], recruitment : row[8]})
           }
           set_rows(formatted_rows)
           console.log(formatted_rows)
           
         })
-      } else {
+      } if (selectedOption == 'company') {
   
         console.log('fetching company profile')
         const url = `${base_url}company_profile?name=${encodeURIComponent(e.target.id)}`
@@ -113,14 +113,32 @@ function Search() {
           console.log(result)
           set_selected_data(result)
           var formatted_rows = []
-          for (var row in result) {
-            formatted_rows.push(Object.assign({}, row))
+          for (var row of result) {
+            console.log(row)
+            formatted_rows.push({id : row[0], company : row[1], title : row[2], interventions : row[4], phase : row[3], update : row[5], start : row[7], completion : row[6], recruitment : row[8]})
           }
           set_rows(formatted_rows)
           console.log(formatted_rows)
           //console.log(selected_data)
         })
   
+      } if (selectedOption == 'condition') {
+        console.log('fetching condition profile')
+        const url = `${base_url}condition_profile?name=${encodeURIComponent(e.target.id)}`
+  
+        fetch(url).then(res => res.json()).then((result) => {
+          console.log(result)
+          set_selected_data(result)
+          var formatted_rows = []
+          for (var row of result) {
+            console.log(row)
+            formatted_rows.push({id : row[0], company : row[1], title : row[2], interventions : row[4], phase : row[3], update : row[5], start : row[7], completion : row[6], recruitment : row[8]})
+          }
+          set_rows(formatted_rows)
+          console.log(formatted_rows)
+          //console.log(selected_data)
+        })
+
       }
   
     }
@@ -154,9 +172,10 @@ function Search() {
       if (selectedOption == 'drug') {
         a = `${base_url}drug?search=${encodeURIComponent(e)}`
         //a = `${base_url}pipeline`
-      } else {
+      } else if (selectedOption == 'company') {
         a = `${base_url}company?search=${encodeURIComponent(e)}`
-  
+      } else if (selectedOption == 'condition') {
+        a = `${base_url}condition?search=${encodeURIComponent(e)}`
       }
 
   
@@ -472,11 +491,21 @@ function Search() {
   
           </div>
   
-          <div className="searchItems">
-            <ul>
+          {selectedOption == 'condition' && <div className="searchItems">
+            <ul> 
+              {list.map(item => (<SearchItem itemName={item[0].toString().concat(' - Company: ').concat(item[2].toString())} key={item} id={item[1]} onClick={expandDetails}/>))}
+            </ul>
+          </div>}
+          {selectedOption == 'company' && <div className="searchItems">
+          <ul>
               {list.map(item => (<SearchItem itemName={item} key={item} id={item} onClick={expandDetails}/>))}
             </ul>
-          </div>
+          </div>}
+          {selectedOption == 'drug' && <div className="searchItems">
+          <ul>
+              {list.map(item => (<SearchItem itemName={item} key={item} id={item} onClick={expandDetails}/>))}
+            </ul>
+          </div>}
   
           <div className={classes.root}>
       {rows != null && <Paper className={classes.paper}>

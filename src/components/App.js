@@ -13,8 +13,8 @@ import UpdateProfile from "./UpdateProfile"
 import CanvasJSReact from '../assets/canvasjs.react';
 import Search from './Search'
 import NavBar from "./Navbar/Navbar"
-import TimelineCreator from "./TimelineCreator"
 import AppComponent from "./AppComponent"
+import LandingPage from "./antFrontEnd/landingPage"
 
 //var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -27,6 +27,7 @@ function App() {
   return (
     <div className = "App">
       <Router>
+      <Route path = "/home" component = {LandingPage} />
         <AuthProvider>
           <NavBar />
             <Container fluid>
