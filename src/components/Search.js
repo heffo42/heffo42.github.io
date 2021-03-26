@@ -12,6 +12,7 @@ import UpdateProfile from "./UpdateProfile"
 import SearchItem from "./SearchItem"
 import { useAuth } from "../contexts/AuthContext"
 import { auth, analytics } from "../firebase"
+
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -39,7 +40,7 @@ import Link from '@material-ui/core/Link';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import ColorizeIcon from '@material-ui/icons/Colorize';
 import SearchBar from "material-ui-search-bar"
-
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
 import CanvasJSReact from '../assets/canvasjs.react';
@@ -63,6 +64,7 @@ function Search() {
     const [activeCompanyData, set_activeCompanyData] = useState(null)
     const [isLoaded, set_isLoaded] = useState(false)
     const {currentUser, setCurrentUser} = useAuth()
+
     const [rows, set_rows] = useState(null)
 
 
@@ -78,6 +80,9 @@ function Search() {
     }));
 
     const breadClasses = breadStyles();
+
+    const [tickerData, setTickerData] = useState(null)
+
 
 
   
@@ -120,6 +125,13 @@ function Search() {
           set_rows(formatted_rows)
           console.log(formatted_rows)
           //console.log(selected_data)
+        })
+
+        const fin_url = `${base_url}fin_chart?company=${encodeURIComponent(e.target.id)}`
+        fetch(fin_url).then(res => res.json()).then((result) => {
+          console.log(result.ticker)
+          setTickerData(result)
+  
         })
   
       } if (selectedOption == 'condition') {
@@ -459,6 +471,7 @@ function Search() {
     
 
 
+
     
     return (
     
@@ -495,6 +508,7 @@ function Search() {
             <ul> 
               {list.map(item => (<SearchItem itemName={item[0].toString().concat(' - Company: ').concat(item[2].toString())} key={item} id={item[1]} onClick={expandDetails}/>))}
             </ul>
+
           </div>}
           {selectedOption == 'company' && <div className="searchItems">
           <ul>
@@ -506,6 +520,11 @@ function Search() {
               {list.map(item => (<SearchItem itemName={item} key={item} id={item} onClick={expandDetails}/>))}
             </ul>
           </div>}
+
+          </div>
+
+
+
   
           <div className={classes.root}>
       {rows != null && <Paper className={classes.paper}>
@@ -586,6 +605,38 @@ function Search() {
         label="Dense padding"
       />
     </div>
+
+
+          {(selectedOption === 'company' && tickerData !== null) && <div>
+            {tickerData.ticker}
+            <LineChart
+      width={500}
+      height={300}
+      data={tickerData.candles}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="date" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line
+        type="monotone"
+        dataKey="adjClose"
+        stroke="#8884d8"
+        activeDot={{ r: 8 }}
+      />
+      
+    </LineChart>
+            </div>}
+
+
+  
         </div>
       </div>
     );
