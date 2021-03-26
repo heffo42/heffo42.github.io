@@ -12,6 +12,7 @@ import UpdateProfile from "./UpdateProfile"
 import SearchItem from "./SearchItem"
 import { useAuth } from "../contexts/AuthContext"
 import { auth, analytics } from "../firebase"
+
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -39,7 +40,7 @@ import Link from '@material-ui/core/Link';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import ColorizeIcon from '@material-ui/icons/Colorize';
 import SearchBar from "material-ui-search-bar"
-
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
 
 
 import CanvasJSReact from '../assets/canvasjs.react';
@@ -63,6 +64,7 @@ function Search() {
     const [activeCompanyData, set_activeCompanyData] = useState(null)
     const [isLoaded, set_isLoaded] = useState(false)
     const {currentUser, setCurrentUser} = useAuth()
+
     const [rows, set_rows] = useState(null)
 
 
@@ -78,6 +80,9 @@ function Search() {
     }));
 
     const breadClasses = breadStyles();
+
+    const [tickerData, setTickerData] = useState(null)
+
 
 
   
@@ -98,13 +103,13 @@ function Search() {
           var formatted_rows = []
           for (var row of result) {
             console.log(row)
-            formatted_rows.push({company : row[0], title : row[1], title : row[2], interventions : row[4], phase : row[3], update : row[5], start : row[7], completion : row[6], recruitment : row[8]})
+            formatted_rows.push({id : row[0], company : row[1], title : row[2], interventions : row[4], phase : row[3], update : row[5], start : row[7], completion : row[6], recruitment : row[8]})
           }
           set_rows(formatted_rows)
           console.log(formatted_rows)
           
         })
-      } else {
+      } if (selectedOption == 'company') {
   
         console.log('fetching company profile')
         const url = `${base_url}company_profile?name=${encodeURIComponent(e.target.id)}`
@@ -113,14 +118,39 @@ function Search() {
           console.log(result)
           set_selected_data(result)
           var formatted_rows = []
-          for (var row in result) {
-            formatted_rows.push(Object.assign({}, row))
+          for (var row of result) {
+            console.log(row)
+            formatted_rows.push({id : row[0], company : row[1], title : row[2], interventions : row[4], phase : row[3], update : row[5], start : row[7], completion : row[6], recruitment : row[8]})
           }
           set_rows(formatted_rows)
           console.log(formatted_rows)
           //console.log(selected_data)
         })
+
+        const fin_url = `${base_url}fin_chart?company=${encodeURIComponent(e.target.id)}`
+        fetch(fin_url).then(res => res.json()).then((result) => {
+          console.log(result.ticker)
+          setTickerData(result)
   
+        })
+  
+      } if (selectedOption == 'condition') {
+        console.log('fetching condition profile')
+        const url = `${base_url}condition_profile?name=${encodeURIComponent(e.target.id)}`
+  
+        fetch(url).then(res => res.json()).then((result) => {
+          console.log(result)
+          set_selected_data(result)
+          var formatted_rows = []
+          for (var row of result) {
+            console.log(row)
+            formatted_rows.push({id : row[0], company : row[1], title : row[2], interventions : row[4], phase : row[3], update : row[5], start : row[7], completion : row[6], recruitment : row[8]})
+          }
+          set_rows(formatted_rows)
+          console.log(formatted_rows)
+          //console.log(selected_data)
+        })
+
       }
   
     }
@@ -154,9 +184,10 @@ function Search() {
       if (selectedOption == 'drug') {
         a = `${base_url}drug?search=${encodeURIComponent(e)}`
         //a = `${base_url}pipeline`
-      } else {
+      } else if (selectedOption == 'company') {
         a = `${base_url}company?search=${encodeURIComponent(e)}`
-  
+      } else if (selectedOption == 'condition') {
+        a = `${base_url}condition?search=${encodeURIComponent(e)}`
       }
 
   
@@ -440,6 +471,7 @@ function Search() {
     
 
 
+
     
     return (
     
@@ -472,11 +504,27 @@ function Search() {
   
           </div>
   
-          <div className="searchItems">
-            <ul>
+          {selectedOption == 'condition' && <div className="searchItems">
+            <ul> 
+              {list.map(item => (<SearchItem itemName={item[0].toString().concat(' - Company: ').concat(item[2].toString())} key={item} id={item[1]} onClick={expandDetails}/>))}
+            </ul>
+
+          </div>}
+          {selectedOption == 'company' && <div className="searchItems">
+          <ul>
               {list.map(item => (<SearchItem itemName={item} key={item} id={item} onClick={expandDetails}/>))}
             </ul>
+          </div>}
+          {selectedOption == 'drug' && <div className="searchItems">
+          <ul>
+              {list.map(item => (<SearchItem itemName={item} key={item} id={item} onClick={expandDetails}/>))}
+            </ul>
+          </div>}
+
           </div>
+
+
+
   
           <div className={classes.root}>
       {rows != null && <Paper className={classes.paper}>
@@ -557,8 +605,39 @@ function Search() {
         label="Dense padding"
       />
     </div>
+
+
+
+    {(selectedOption === 'company' && tickerData !== null) && <div>
+            {tickerData.ticker}
+            <LineChart
+      width={500}
+      height={300}
+      data={tickerData.candles}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="date" />
+      <YAxis />
+      {/* <Tooltip /> */}
+      <Legend />
+      <Line
+        type="monotone"
+        dataKey="adjClose"
+        stroke="#8884d8"
+        activeDot={{ r: 8 }}
+      />
+      
+    </LineChart>
+            </div>}
+
         </div>
-      </div>
+      
     );
 }
 

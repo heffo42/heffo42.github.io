@@ -18,8 +18,8 @@ import SearchBar from "material-ui-search-bar"
 
 import CanvasJSReact from '../assets/canvasjs.react';
 
-//const base_url = 'https://bio-api.herokuapp.com/'
-const base_url = 'http://localhost:5000/'
+const base_url = 'https://bio-api.herokuapp.com/'
+//const base_url = 'http://localhost:5000/'
 
 function AppComponent() {
 
@@ -91,7 +91,7 @@ function AppComponent() {
               }
             }
 
-            for (var intervention of company_result) {
+            for (var company of company_result) {
               const indications_array = []
               for (var entry of result) {
                 if (entry[7] == company) {
@@ -104,6 +104,7 @@ function AppComponent() {
             }
             for (var company of company_result) {
               var indication_dates = {}
+              console.log(company_indications[company])
               for (var indication of company_indications[company])
                 var dates_array = []
                 for (var entry of result) {
@@ -169,6 +170,8 @@ function AppComponent() {
             var intervention_dates = {}
             for (var intervention of intervention_result) {
               var dates_array = []
+              dates_array.push({date: minDate, name: "Start", phase : "Start"})
+              dates_array.push({date: maxDate, name: "End", phase : "End"})
               for (var entry of result) {
                 var start_date = 'Study Start Date of: '
                 var end_date = 'Study End Date of: '
@@ -194,8 +197,6 @@ function AppComponent() {
                     dates_array.push({date: entry[9], name : end_date.concat(entry[4])})
                   }
                 }
-                dates_array.push({date: minDate, name: "Start"})
-                dates_array.push({date: maxDate, name: "End"})
               }
               intervention_dates[intervention] = dates_array
             }
