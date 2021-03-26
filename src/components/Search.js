@@ -40,7 +40,7 @@ import Link from '@material-ui/core/Link';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import ColorizeIcon from '@material-ui/icons/Colorize';
 import SearchBar from "material-ui-search-bar"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
 
 
 import CanvasJSReact from '../assets/canvasjs.react';
@@ -607,7 +607,8 @@ function Search() {
     </div>
 
 
-          {(selectedOption === 'company' && tickerData !== null) && <div>
+
+    {(selectedOption === 'company' && tickerData !== null) && <div>
             {tickerData.ticker}
             <LineChart
       width={500}
@@ -623,7 +624,7 @@ function Search() {
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date" />
       <YAxis />
-      <Tooltip />
+      {/* <Tooltip /> */}
       <Legend />
       <Line
         type="monotone"
@@ -635,10 +636,8 @@ function Search() {
     </LineChart>
             </div>}
 
-
-  
         </div>
-      </div>
+      
     );
 }
 
