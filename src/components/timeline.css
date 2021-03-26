@@ -1,0 +1,184 @@
+/*Color Options*/
+:root {
+    --timeline-color: #87dbf2;
+    --timeline-hover-color: #28e28e;
+    --detail-box-bg: #efefef;  
+  }
+  
+  /* parent container to give breathing room */
+  div {
+    position:relative;
+    margin: 100px;
+  }
+  
+  /* Zero out padding and positioning in timeline */
+  
+  .timeline.vertical {
+    width:4px;
+    padding:0;
+  }
+  .timeline.horizontal {
+    width:100%;
+  }
+  
+  .timeline li, .timeline p {
+    display: block;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .timeline span {display:block;}
+  
+  .timeline.horizontal .event {
+    top: -20px;
+    left: 5px;
+    transform: rotate(-45deg);
+    transform-origin: 0% 0%;
+  }
+  
+  .timeline .year {
+    line-height:0.8em;
+  }
+  
+  .timeline .short-desc {
+    font: 0.8em arial;
+    white-space:nowrap;
+  }
+  
+  .timeline {
+      position: relative;
+      display: block;
+    background: var(--timeline-color);
+  }
+  
+  .timeline.horizontal {
+    height: 2px;
+  }
+  
+  .timeline.vertical {
+    width: 2px;
+    height: 800px;
+  }
+  
+  .timeline::after {
+    position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+    border-radius: 3px;
+    content: "";
+    z-index:0;
+  }
+  
+  .timeline.horizontal::after {
+    top: -9px;
+    right: -10px;
+    border-right: 0;
+      border-left: 20px solid var(--timeline-color);
+  }
+  .timeline.vertical::after {
+    bottom: -20px;
+    left: -8px;
+    border-bottom: 0;
+      border-top: 20px solid var(--timeline-color);
+  }
+  
+  
+  .timeline li {
+    padding:0 20px; /* offsets short desc*/
+    bottom: 8px;
+  }
+  
+  
+  .timeline li::before {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 12px;
+      height: 12px;
+      border: 1px solid var(--timeline-color);
+      border-radius: 10px;
+      background: #ffffff;
+  }
+  
+  .timeline.vertical li::before {
+      left: -6px;
+  }
+  
+  .timeline.horizontal li::before {
+    left: -12px;
+    bottom: -14px;
+  }
+  
+  /* ---- Details ---- */
+  
+  .timeline .details {
+    z-index:1;
+    display: none;
+    min-width: 200px;
+    margin-top:15px;
+    transform-origin: 0% 0%;
+    box-sizing:border-box;
+      padding: 15px;
+      border-radius: 3px;
+      border-right: 2px solid rgba(0,0,0,.1);
+      border-bottom: 2px solid rgba(0,0,0,.1);
+      font: 12px arial;
+      background: var(--detail-box-bg);
+  }
+  .timeline .details::before {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-bottom-color: var(--detail-box-bg);
+      border-top: 0;
+  }
+  
+  .timeline.horizontal .details {
+    left: -18px;
+    top: 8px;
+  }
+  
+  .timeline.vertical .details {
+   left: -13px;
+   top: 10px;
+  }
+  
+  .timeline.horizontal .details::before {
+    top: -10px;
+    left:4px;
+  }
+  
+  .timeline.vertical .details::before {
+    top: -10px;
+    left:4px;
+  }
+  
+  /* ---- Hover effects ---- */
+  
+  .timeline li:hover {
+      cursor: pointer;
+  }
+  .timeline li:hover::before {
+      width: 8px;
+      height: 8px;
+      border-width: 5px;
+      border-color: var(--timeline-hover-color);
+  }
+  
+  .timeline.horizontal li:hover::before {
+    left: -14px;
+      top: -2px;
+  }
+  .timeline.vertical li:hover::before {
+    top: -2px;
+    left:-8px;
+  }
+  .timeline li:hover .details {
+      display: block;
+  }

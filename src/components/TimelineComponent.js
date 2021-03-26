@@ -8,7 +8,7 @@ var _ = require('lodash')
 
 const SVG_WIDTH = 1000
 const SVG_HEIGHT = 40
-const SVG_VERTICAL_PADDING = 80
+const SVG_VERTICAL_PADDING = 25
 const SVG_WORKING_WIDTH = SVG_WIDTH - (SVG_VERTICAL_PADDING * 2)
 
 function dateToLabel(date) {
@@ -40,9 +40,9 @@ function labelGroupPos(dataArray,groupIndex) {
   }
 }
 
-const Circle = ({x,y}) =>
+const Circle = ({x,y, fillColor}) =>
   <path transform={ transformTranslate(x,y) } d="M7 12c2.76 0 5-2.24 5-5S9.76 2 7 2 2 4.24 2 7s2.24 5 5 5z" 
-  strokeOpacity=".492" stroke="#2A2A2A" strokeWidth=".5" fill="#fff" fillRule="evenodd"/>
+  strokeOpacity=".492" stroke="#2A2A2A" strokeWidth=".5" fill= {fillColor} fillRule="evenodd"/>
 
 Circle.props = {
   x: 0,
@@ -51,9 +51,10 @@ Circle.props = {
 
 const Label = ({value}) =>
   <text x={ 0 } y={ 30 } 
-        fontFamily="Verdana" 
-        fontSize="9"
-        width="100%">
+        fontFamily="Helvetica" 
+        fontSize="7"
+        width="100%"
+        style= {{transform: [{ rotate: "90deg" }]}}>
     { dateToLabel(value) }
   </text>
 
@@ -82,6 +83,7 @@ export default class TimelineComponent extends React.Component {
 
     let sortedData = sortDataByDates(this.props.data)
     let sortedDataUniqByDate = _.uniq(sortedData,'date')
+    console.log(sortedDataUniqByDate)
 
     function translateX(x) {
       return `translate(${x},0)`
@@ -111,7 +113,17 @@ export default class TimelineComponent extends React.Component {
                      onMouseOver={ this.showPopover.bind(this, index) } 
                      onMouseOut={ this.hidePopover.bind(this) }
                      style={ { cursor: 'pointer' } }>
-                    <Circle x={ 20 } y={ 4 } />
+                    {date.phase == "Phase 1/Phase 2" && <Circle x={ 20 } y={ 4 }  fillColor = {'#ffa500'}/>}
+                    {date.phase == "Phase 1" && <Circle x={ 20 } y={ 4 }  fillColor = {'#ff0000'}/>}
+                    {date.phase == "Phase 2" && <Circle x={ 20 } y={ 4 }  fillColor = {'#ffff00'}/>}
+                    {date.phase == "Phase 3" && <Circle x={ 20 } y={ 4 }  fillColor = {'#00ff00'}/>}
+                    {date.phase == null && <Circle x={ 20 } y={ 4 } fillColor = {'#000000'}/>}
+                    {date.phase == "N/A" && <Circle x={ 20 } y={ 4 } fillColor = {'#000000'}/>}
+                    {date.phase == "Start" && <Circle x={ 20 } y={ 4 } fillColor = {'#ffffff'}/>}
+                    {date.phase == "End" && <Circle x={ 20 } y={ 4 } fillColor = {'#ffffff'}/>}
+                    {date.phase == "Phase 2/Phase 3" && <Circle x={ 20 } y={ 4 } fillColor = {'#90EE90'}/>}
+                    {date.phase == "Phase 4" && <Circle x={ 20 } y={ 4 } fillColor = {'#00ff00'}/>}
+                    {date.phase == "Early Phase 1" && <Circle x={ 20 } y={ 4 } fillColor = {'#8b0000'}/>}
                     <Label value={ date.date } index={ index } uniqueLabelsCount={ sortedDataUniqByDate.length } />
                   </g>
                 )
