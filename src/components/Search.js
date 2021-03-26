@@ -13,6 +13,7 @@ import UpdateProfile from "./UpdateProfile"
 import SearchItem from "./SearchItem"
 import { useAuth } from "../contexts/AuthContext"
 import { auth, analytics } from "../firebase"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 import CanvasJSReact from '../assets/canvasjs.react';
 //var CanvasJSReact = require('./canvasjs.react');
@@ -32,6 +33,7 @@ function Search() {
     const [activeCompanyData, set_activeCompanyData] = useState(null)
     const [isLoaded, set_isLoaded] = useState(false)
     const {currentUser, setCurrentUser} = useAuth()
+    const [tickerData, setTickerData] = useState(null)
 
 
   
@@ -59,6 +61,13 @@ function Search() {
           console.log(result)
           set_selected_data(result)
           console.log(selected_data)
+        })
+
+        const fin_url = `${base_url}fin_chart?company=${encodeURIComponent(e.target.id)}`
+        fetch(fin_url).then(res => res.json()).then((result) => {
+          console.log(result.ticker)
+          setTickerData(result)
+  
         })
   
       }
@@ -121,6 +130,50 @@ function Search() {
     }
 
 
+    const data = [
+      {
+        name: 'Page A',
+        uv: 4000,
+        pv: 2400,
+        amt: 2400,
+      },
+      {
+        name: 'Page B',
+        uv: 3000,
+        pv: 1398,
+        amt: 2210,
+      },
+      {
+        name: 'Page C',
+        uv: 2000,
+        pv: 9800,
+        amt: 2290,
+      },
+      {
+        name: 'Page D',
+        uv: 2780,
+        pv: 3908,
+        amt: 2000,
+      },
+      {
+        name: 'Page E',
+        uv: 1890,
+        pv: 4800,
+        amt: 2181,
+      },
+      {
+        name: 'Page F',
+        uv: 2390,
+        pv: 3800,
+        amt: 2500,
+      },
+      {
+        name: 'Page G',
+        uv: 3490,
+        pv: 4300,
+        amt: 2100,
+      },
+    ];
     
     return (
     
@@ -152,6 +205,34 @@ function Search() {
               {list.map(item => (<SearchItem itemName={item} key={item} onClick={expandDetails}/>))}
             </ul>
           </div>
+
+          {(selectedOption !== 'drug' && tickerData !== null) && <div>
+            {tickerData.ticker}
+            <LineChart
+      width={500}
+      height={300}
+      data={tickerData.candles}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="date" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line
+        type="monotone"
+        dataKey="adjClose"
+        stroke="#8884d8"
+        activeDot={{ r: 8 }}
+      />
+      
+    </LineChart>
+            </div>}
   
           <hr/> {<Table striped="striped" bordered="bordered" hover="hover">
           <thead>
