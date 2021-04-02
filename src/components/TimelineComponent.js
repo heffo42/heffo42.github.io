@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, StyleSheet} from 'react-native'
+// import {Text, StyleSheet} from 'react-native'
 require('./TimelineComponent.css')
 
 
@@ -53,7 +53,7 @@ Circle.props = {
 
   
 
-const textStyles = StyleSheet.create
+// const textStyles = StyleSheet.create
 
 export default class TimelineComponent extends React.Component {
 
