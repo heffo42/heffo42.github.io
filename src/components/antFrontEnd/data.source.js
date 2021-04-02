@@ -154,7 +154,7 @@ export const Banner00DataSource = {
         </span>
       </span>
     ),
-    href: 'https://heffo42.github.io/heffo42.github.io/',
+    href: '/',
   },
 };
 export const Content00DataSource = {
@@ -549,8 +549,8 @@ export const Content00DataSource = {
                                           <font className="vertical-align: inherit;">
                                             We leverage deep highway neural
                                             networks to fetch the research
-                                            publication associated your
-                                            desired&nbsp;
+                                            publication associated wtih your
+                                            desired trial&nbsp;
                                           </font>
                                         </font>
                                       </font>
