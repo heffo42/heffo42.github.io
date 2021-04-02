@@ -1,5 +1,7 @@
 import React from 'react'
+import {Text, StyleSheet} from 'react-native'
 require('./TimelineComponent.css')
+
 
 
 
@@ -7,8 +9,8 @@ var moment = require('moment')
 var _ = require('lodash')
 
 const SVG_WIDTH = 1000
-const SVG_HEIGHT = 40
-const SVG_VERTICAL_PADDING = 25
+const SVG_HEIGHT = 50
+const SVG_VERTICAL_PADDING = 40
 const SVG_WORKING_WIDTH = SVG_WIDTH - (SVG_VERTICAL_PADDING * 2)
 
 function dateToLabel(date) {
@@ -49,14 +51,9 @@ Circle.props = {
   y: 0
 }
 
-const Label = ({value}) =>
-  <text x={ 0 } y={ 30 } 
-        fontFamily="Helvetica" 
-        fontSize="7"
-        width="100%"
-        style= {{transform: [{ rotate: "90deg" }]}}>
-    { dateToLabel(value) }
-  </text>
+  
+
+const textStyles = StyleSheet.create
 
 export default class TimelineComponent extends React.Component {
 
@@ -124,7 +121,9 @@ export default class TimelineComponent extends React.Component {
                     {date.phase == "Phase 2/Phase 3" && <Circle x={ 20 } y={ 4 } fillColor = {'#90EE90'}/>}
                     {date.phase == "Phase 4" && <Circle x={ 20 } y={ 4 } fillColor = {'#00ff00'}/>}
                     {date.phase == "Early Phase 1" && <Circle x={ 20 } y={ 4 } fillColor = {'#8b0000'}/>}
-                    <Label value={ date.date } index={ index } uniqueLabelsCount={ sortedDataUniqByDate.length } />
+                    <text class = "text-orientation" x={ 0 } y={ 10 } fontFamily="Helvetica" fontSize="7" width="100%">
+                      { dateToLabel(date.date) }
+                    </text>
                   </g>
                 )
               }
