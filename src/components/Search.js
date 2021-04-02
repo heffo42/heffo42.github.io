@@ -569,7 +569,9 @@ function Search() {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
+                        <a href={`https://clinicaltrials.gov/ct2/show/${row.id}`} rel="noreferrer">
                         {row.id}
+                        </a>
                       </TableCell>
                       <TableCell align="right">{row.company}</TableCell>
                       <TableCell align="right">{row.title}</TableCell>
