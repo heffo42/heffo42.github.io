@@ -28,6 +28,8 @@
     "react-app-rewired": "^2.1.8",
     "react-bootstrap": "^1.5.0",
     "react-dom": "^16.13.1",
+    "react-native": "^0.64.0",
+    "react-native-web": "^0.15.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-search-field": "^1.2.0",
